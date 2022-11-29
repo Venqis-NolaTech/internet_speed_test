@@ -19,6 +19,19 @@ class _MyAppState extends State<MyApp> {
 
   String unitText = 'Mb/s';
 
+  int downloadVelocity = 1;
+
+  void _parserDownloadVelocity(double transferRate, SpeedUnit unit) {
+    switch (unit) {
+      case SpeedUnit.Kbps:
+        downloadVelocity = (transferRate / 1000).round();
+        break;
+      default:
+        downloadVelocity = transferRate.round();
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,10 +50,12 @@ class _MyAppState extends State<MyApp> {
                   Text('Download rate  $downloadRate $unitText'),
                 ],
               ),
-              RaisedButton(
+              MaterialButton(
                 child: Text('start testing'),
                 onPressed: () {
                   internetSpeedTest.startDownloadTesting(
+                    testServer: "https://ipv4.k-net.testdebit.info/1G.iso",
+                    fileSize: 1073741824,
                     onDone: (double transferRate, SpeedUnit unit) {
                       setState(() {
                         downloadRate = transferRate;
@@ -57,41 +72,7 @@ class _MyAppState extends State<MyApp> {
                       });
                     },
                     onError: (String errorMessage, String speedTestError) {},
-                    fileSize: 20000000,
-                  );
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text('Progress $uploadProgress%'),
-                  Text('Upload rate  $uploadRate Kb/s'),
-                ],
-              ),
-              RaisedButton(
-                child: Text('start testing'),
-                onPressed: () {
-                  internetSpeedTest.startUploadTesting(
-                    onDone: (double transferRate, SpeedUnit unit) {
-                      setState(() {
-                        uploadRate = transferRate;
-                        unitText = unit == SpeedUnit.Kbps ? 'Kb/s' : 'Mb/s';
-                        uploadProgress = '100';
-                      });
-                    },
-                    onProgress:
-                        (double percent, double transferRate, SpeedUnit unit) {
-                     setState(() {
-                        uploadRate = transferRate;
-                        unitText = unit == SpeedUnit.Kbps ? 'Kb/s' : 'Mb/s';
-                        uploadProgress = percent.toStringAsFixed(2);
-                      });
-                    },
-                    onError: (String errorMessage, String speedTestError) {
-                      print(
-                          'the errorMessage $errorMessage, the speedTestError $speedTestError');
-                    },
-                    fileSize: 20000000,
+                    //fileSize: 1100,
                   );
                 },
               ),

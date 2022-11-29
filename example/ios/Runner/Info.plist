@@ -41,17 +41,17 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
-    <key>App Transport Security Settings</key>
-    <dict>
-        <key>Allow Arbitrary Loads</key><true/>
-    </dict>
-    <key>NSIncludesSubdomains</key>
-    <true/>
+<!--    <key>NSAppTransportSecurity</key>-->
+<!--    <dict>-->
+<!--        <key>NSAllowsArbitraryLoads</key>-->
+<!--        <true/>-->
+<!--    </dict>-->
+<!--    <key>App Transport Security Settings</key>-->
+<!--    <dict>-->
+<!--        <key>Allow Arbitrary Loads</key><true/>-->
+<!--    </dict>-->
+<!--    <key>NSIncludesSubdomains</key>-->
+<!--    <true/>-->
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 </dict>
